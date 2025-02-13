@@ -39,11 +39,21 @@ $error_message = $_GET['error'] ?? '';
                     <h3><i class="fas fa-user-circle"></i> Profile Info</h3>
                     <div class="card-content">
                         <div class="profile-info">
+                            <div class="profile-picture">
+                                <img src="<?php echo !empty($_SESSION['avatar']) ? htmlspecialchars('uploads/avatars/' . $_SESSION['avatar']) : 'assets/default-avatar.png'; ?>" 
+                                     alt="Profile Picture">
+                                <button type="button" class="change-avatar-btn" title="Change profile picture">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
                             <p><i class="fas fa-user"></i> <strong>Name:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?></p>
                             <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <?php echo htmlspecialchars($_SESSION['email']); ?></p>
                         </div>
                         <button class="action-btn edit-profile-btn"><i class="fas fa-edit"></i> Edit Profile</button>
                         <button class="action-btn change-password-btn"><i class="fas fa-key"></i> Change Password</button>
+                        <button class="action-btn delete-account-btn" style="background-color: #dc3545;">
+                            <i class="fas fa-trash-alt"></i> Delete Account
+                        </button>
                     </div>
                 </div>
             </div>
@@ -75,6 +85,41 @@ $error_message = $_GET['error'] ?? '';
                 <input type="password" name="new_password" placeholder="New Password" required>
                 <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
                 <button type="submit" class="action-btn"><i class="fas fa-key"></i> Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Avatar Modal -->
+    <div id="avatarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Change Profile Picture</h2>
+            <form id="avatarForm" action="update_avatar.php" method="POST" enctype="multipart/form-data">
+                <div class="file-input-wrapper">
+                    <input type="file" name="avatar" accept="image/*" required>
+                    <p class="file-help">Maximum size: 5MB. Accepted formats: JPG, PNG, GIF</p>
+                </div>
+                <button type="submit" class="action-btn">
+                    <i class="fas fa-upload"></i> Upload Picture
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteAccountModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Delete Account</h2>
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Warning: This action cannot be undone. All your data will be permanently deleted.</p>
+            </div>
+            <form id="deleteAccountForm" action="delete_account.php" method="POST">
+                <input type="password" name="password" placeholder="Enter your password to confirm" required>
+                <button type="submit" class="action-btn delete-btn">
+                    <i class="fas fa-trash-alt"></i> Permanently Delete Account
+                </button>
             </form>
         </div>
     </div>
