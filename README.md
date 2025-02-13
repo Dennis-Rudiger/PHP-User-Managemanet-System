@@ -24,7 +24,7 @@ A comprehensive user management system built with PHP, MySQL, and JavaScript, fe
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/dennis-rudiger/php-user-management.git
+git clone https://github.com/Dennis-Rudiger/php-user-management.git
 ```
 
 2. Import the database schema:
